@@ -110,7 +110,13 @@ def clear():
 
 def percent():
     new_result = display_result.get()
-    new_result = int(display_result / 100)
+    new_result = float(new_result) / 100
+    display_result.set(new_result)
+
+
+def negative_change():
+    new_result = display_result.get()
+    new_result = float(new_result) * -1
     display_result.set(new_result)
 
 
@@ -120,11 +126,13 @@ title.grid(row=1, column=1, columnspan=4)
 display_result = StringVar()
 result_bar = Entry(root, textvariable=display_result, justify="right")
 result_bar.grid(row=2, column=1, columnspan=4)
+result_bar.configure(background="black")
+result_bar.configure(foreground="white")
 
 clear_button = Button(root, text="Clear", font="Helvetica 16", width=5, command=clear)
 clear_button.grid(row=3, column=1)
 
-negative_button = Button(root, text="(-)", font="Helvetica 16", width=5)
+negative_button = Button(root, text="(-)", font="Helvetica 16", width=5, command=negative_change)
 negative_button.grid(row=3, column=2)
 
 percent_button = Button(root, text="%", font="Helvetica 16", width=5, command=percent)
